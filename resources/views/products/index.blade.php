@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Lista de productos')
+
 @section('content')
     <div class="container mt-5">
         @if(session('success'))
@@ -36,7 +38,16 @@
                             <td>${{ $p->price }}</td>
                             <td>{{ $p->description }}</td>
                             <td class="text-center">
-                                <a href="/products/{{ $p->id }}" class="btn btn-info">Mostrar</a>
+                                {{-- <a href="/products/{{ $p->id }}" class="btn btn-info">Mostrar</a> --}}
+                                <a href="{{ route('products.show', $p->id) }}" class="btn btn-info">Mostrar</a>
+                                <a href="{{ route('products.edit', $p->id) }}" class="btn btn-warning">Editar</a>
+                                <a href=" {{ route('products.destroy', $p->id) }}">
+                                    <form action="{{ route('products.destroy', $p->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

@@ -1,4 +1,7 @@
 @extends('layout.app')
+
+@section('title', 'Mostrar Producto')
+
 @section('content')
     <div class="container mt-3">
         <div class="d-flex justify-content-end mb-3">
